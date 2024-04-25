@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 1</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/page1">Page 1</a></li>
+      <li><a href="/page2">Page 2</a></li>
+    </ul>
+  </nav>
+  <h1>Page 1</h1>
+  <!-- Öğrenci bilgilerini listeleme -->
+  <ul id="student-list">
+  </ul>
+
+  <script>
+    // Öğrenci bilgilerini alma ve listeleme
+    fetch('/students')
+      .then(response => response.json())
+      .then(students => {
+        const studentList = document.getElementById('student-list');
+        students.forEach(student => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `ID: ${student.id}, Name: ${student.name}, Age: ${student.age}`;
+          studentList.appendChild(listItem);
+        });
+      });
+  </script>
+</body>
+</html>
